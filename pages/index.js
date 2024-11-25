@@ -28,7 +28,7 @@ export default function Home() {
                   'test_agent',
                   'https://dbm00000dxzg5eaj-dev-ed.develop.my.site.com/ESWtestagent1732560051667',
                   {
-                    scrt2URL: 'https://dbm00000dxzg5eaj-dev.develop.my.salesforce-scrt.com'
+                    scrt2URL: 'https://dbm00000dxzg5eaj-dev-ed.develop.my.salesforce-scrt.com'
                   }
                 );
               } catch (err) {
