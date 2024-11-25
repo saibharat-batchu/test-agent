@@ -1,6 +1,11 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import Script from 'next/script';
 
+function init() {
+  console.log("test init");
+  initEmbeddedMessaging();
+}
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -8,6 +13,38 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Script
+        id="embedded-messaging-init"
+        strategy="lazyOnload"
+        dangerouslySetInnerHTML={{
+          __html: `
+            function initEmbeddedMessaging() {
+              try {
+                embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+
+                embeddedservice_bootstrap.init(
+                  '00Dbm00000DxzG5',
+                  'test_agent',
+                  'https://dbm00000dxzg5eaj-dev-ed.develop.my.site.com/ESWtestagent1732560051667',
+                  {
+                    scrt2URL: 'https://dbm00000dxzg5eaj-dev.develop.my.salesforce-scrt.com'
+                  }
+                );
+              } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+              }
+            };
+          `,
+        }}
+      />
+      <Script
+        src="https://dbm00000dxzg5eaj-dev-ed.develop.my.site.com/ESWtestagent1732560051667/assets/js/bootstrap.min.js"
+        strategy="lazyOnload"
+        onLoad={() => {
+          init();
+        }}
+      />
 
       <main>
         Hello world
